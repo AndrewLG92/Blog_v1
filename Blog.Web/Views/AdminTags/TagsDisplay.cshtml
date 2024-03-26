@@ -1,0 +1,39 @@
+﻿@model List<Blog.Web.Models.Domain.Tag>
+
+@{
+    ViewData["Title"] = "Tags";
+}
+
+
+
+<form class="container">
+    <div class="row">
+        <h3 class="col">@ViewData["Title"]</h3>
+        <button class="btn btn-primary col-1" asp-area="" asp-controller="AdminTags" asp-action="Add">Add Tag</button>
+    </div>
+    <hr />
+    <table class="table table-responsive table-hover">
+        <thead>
+            <tr class="table-active">
+                <th>Id</th>
+                <th>Name</th>
+                <td>Action</td>
+            </tr>
+        </thead>
+        <tbody>
+           
+            @foreach(var item in Model)
+            {
+                <tr>
+                    <td>@item.Id</td>
+                    <td>@item.Name</td>
+                    <td>
+                        <div class="btn-group btn-group-sm">
+                            <a class="btn btn-primary" asp-controller="AdminTags" asp-action="EditTag" asp-route-id="@item.Id" asp-area="">Edit</a>
+                        </div>
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+</form>
