@@ -50,7 +50,6 @@ namespace Blog.Web.Controllers
                 Heading = model.Heading,
                 PageTitle = model.PageTitle,
                 Content = model.Content,
-                UrlHandle = model.UrlHandle,
                 PublishedDate = model.PublishedDate,
                 Author = model.Author,
                 Visible = model.Visible,
