@@ -1,0 +1,14 @@
+﻿@model Blog.Web.Models.ViewModels.AddTagRequestViewModel
+
+
+<form method="post">
+    <div class="form-group">
+        <label class="form-label">Name</label>
+        <input type="text" class="form-control" id="name" asp-for="Name" />
+    </div>
+    <div class="modal-footer">
+        <div class="form-group">
+            <button asp-action="Add" type="submit" class="btn btn-primary">Submit</button>
+        </div>
+    </div>
+</form>

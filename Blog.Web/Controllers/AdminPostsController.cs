@@ -6,6 +6,7 @@ using Microsoft.EntityFrameworkCore;
 
 namespace Blog.Web.Controllers
 {
+    
     public class AdminPostsController : Controller
     {
         private readonly BlogDbContext _dbBlogContext;
@@ -66,20 +67,31 @@ namespace Blog.Web.Controllers
             return RedirectToAction("AddBlogs");
         }
 
-        [HttpPost]
+        [HttpPost("/upload")]
         public async Task<IActionResult> UploadImage(List<IFormFile> files)
         {
-            var filepath = "";
-            foreach (IFormFile photo in files)
+            if (files == null || files.Count == 0)
+                return BadRequest("No files uploaded.");
+
+            var fileUrls = new List<string>();
+            var uploadsFolder = Path.Combine(_env.WebRootPath, "images");
+            Directory.CreateDirectory(uploadsFolder); // Ensure the folder exists
+
+            foreach (var file in files)
             {
-                string serverMapPath = Path.Combine(_env.WebRootPath, "Images", photo.FileName);
-                using(var stream = new FileStream(serverMapPath, FileMode.Create))
+                var fileName = Guid.NewGuid().ToString() + Path.GetExtension(file.FileName);
+                var filePath = Path.Combine(uploadsFolder, fileName);
+
+                using (var fileStream = new FileStream(filePath, FileMode.Create))
                 {
-                    await photo.CopyToAsync(stream);
+                    await file.CopyToAsync(fileStream);
                 }
-                filepath = "https://localhost:7168/" + "Images/" + photo.FileName;
+
+                var fileUrl = Url.Content($"~/images/{fileName}");
+                fileUrls.Add(fileUrl);
             }
-            return Json(new { url = filepath });
+
+            return Ok(new { locations = fileUrls });
         }
     }
 }

@@ -30,11 +30,10 @@ namespace Blog.Web.Controllers
         [HttpGet]
         public IActionResult Add()
         {
-            return View();
+            return PartialView("_AddModel");
         }
 
         [HttpPost]
-        [ActionName("Add")]
         public async Task<IActionResult> Add(AddTagRequestViewModel addTagRequest)
         {
 
@@ -49,7 +48,7 @@ namespace Blog.Web.Controllers
             // Need to Save to the DB
             await blogDbContext.SaveChangesAsync();
 
-            return RedirectToAction("Add");
+            return RedirectToAction("TagsDisplay");
         }
 
 
@@ -60,16 +59,17 @@ namespace Blog.Web.Controllers
 
             if (tag != null)
             {
-                var viewModel = new UpdateTagViewModel()
+                var item = new UpdateTagViewModel()
                 {
                     Id = tag.Id,
                     Name = tag.Name,
                 };
-                return await Task.Run(() => View("EditTag", viewModel));
+                return PartialView("_TagModal", item);
             }
 
             return RedirectToAction("TagsDisplay");
         }
+
 
         [HttpPost]
         public async Task<IActionResult> UpdateTag(UpdateTagViewModel model)
@@ -89,19 +89,35 @@ namespace Blog.Web.Controllers
         }
 
         [HttpPost]
-        public async Task<IActionResult> DeleteTag(Tag model)
+        public async Task<IActionResult> DeleteTag(Guid id)
         {
             var tag = await blogDbContext.Tags
                 .AsNoTracking()
-                .FirstOrDefaultAsync(x => x.Id == model.Id);
-            
-            if(tag is not null)
+                .FirstOrDefaultAsync(x => x.Id == id);
+
+            if (tag is not null)
             {
-                blogDbContext.Tags.Remove(model);
+                blogDbContext.Tags.Remove(tag);
                 await blogDbContext.SaveChangesAsync();
             }
 
             return RedirectToAction("TagsDisplay");
+        }
+
+        [HttpGet]
+        public async Task<IActionResult> Delete(Guid id)
+        {
+            var tag = await blogDbContext.Tags
+                .AsNoTracking()
+                .FirstOrDefaultAsync(x => x.Id == id);
+
+            if (tag is not null)
+            {
+                return PartialView("_DeleteModel", tag);
+                
+            }
+            return RedirectToAction("TagsDisplay");
+
         }
     }
 }

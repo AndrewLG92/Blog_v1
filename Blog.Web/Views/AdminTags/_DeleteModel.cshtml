@@ -1,0 +1,13 @@
+﻿@model Blog.Web.Models.Domain.Tag
+
+<form method="post">
+    <div class="form-group">
+        <p>Are you sure you want to delete @Html.Raw(@Model.Name)?</p>
+    </div>
+    <div class="modal-footer">
+        <div class="form-group">
+            <input type="hidden" asp-for="Id" />
+            <button asp-action="DeleteTag" type="submit" class="btn btn-danger">Delete</button>
+        </div>
+    </div>
+</form>

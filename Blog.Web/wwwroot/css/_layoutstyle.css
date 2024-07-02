@@ -1,0 +1,19 @@
+﻿body .test-class {
+  margin-top: 20em;
+  width: 200px !important;
+  height: 300px;
+  background-color: rgb(37, 28, 144) !important;
+}
+body .btn-close {
+  --bs-btn-close-color: white;
+  --bs-btn-close-bg: url(~/lib/bootstrap-icons/icons/x-lg.svg);
+}
+body .bg-primary {
+  background-color: rgb(37, 28, 144) !important;
+}
+body .navbar-toggler {
+  border: none;
+}
+body .navbar-toggler:focus {
+  box-shadow: none !important;
+}

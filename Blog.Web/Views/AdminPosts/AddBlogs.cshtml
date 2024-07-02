@@ -16,11 +16,11 @@
     <form method="post">
         <div class="mb-3">
             <label class="form-label">Heading</label>
-            <input type="text" class="form-control" name="heading" id="heading" asp-for="Heading" />
+            <input type="text" class="form-control" name="heading" id="heading" asp-for="Heading" required />
         </div>
         <div class="mb-3">
             <label class="form-label">Page Title</label>
-            <input type="text" class="form-control" name="pageTitle" id="pageTitle" asp-for="PageTitle" />
+            <input type="text" class="form-control" name="pageTitle" id="pageTitle" asp-for="PageTitle" required />
         </div>
         <div class="mb-3">
             <label class="form-label">Content</label>
@@ -28,21 +28,21 @@
         </div>
         <div class="mb-3">
             <label class="form-label">Url Handle</label>
-            <input type="text" class="form-control" id="urlHandle" name="urlHandle" asp-for="UrlHandle" />
+            <input type="text" class="form-control" id="urlHandle" name="urlHandle" asp-for="UrlHandle" required />
         </div>
         <div class="mb-3">
-            <label class="form-label">Published Date</label>
-            <input type="date" class="form-control" id="publishedDate" name="publishedDate" asp-for="PublishedDate" />
+            <label class="form-label">Published Date</label> 
+            <input type="date" class="form-control" id="publishedDate" name="publishedDate" asp-for="PublishedDate" required/>
         </div>
         <div class="mb-3">
             <label class="form-label">Author</label>
-            <input type="text" class="form-control" id="author" name="author" asp-for="Author" />
+            <input type="text" class="form-control" id="author" name="author" asp-for="Author" required/>
         </div>
         
 
         <div class="mb-3">
             <label class="form-label">Category</label>
-            <select class="form-select" aria-label="Default select example" id="category">
+            <select class="form-select" aria-label="Default select example" id="category" required>
                 <option selected>Select Category</option>
                 @foreach (var item in Model.BlogCategories)
                 {
@@ -53,7 +53,7 @@
 
         <div class="mb-3">
             <label class="form-label">Tags</label>
-            <select class="form-select" aria-label="Default select example" id="tags">
+            <select class="form-select" aria-label="Default select example" id="tags" required>
                 <option selected>Select Tag</option>
                 @foreach(var item in Model.Tags)
                 {
@@ -63,7 +63,7 @@
         </div>
 
         <div class="btn-group pb-3" role="group" aria-label="Basic checkbox toggle button group">
-            <input type="checkbox" class="btn-check" id="visible" autocomplete="off" name="visible" asp-for="Visible" />
+            <input type="checkbox" class="btn-check" id="visible" autocomplete="off" name="visible" asp-for="Visible" required />
             <label class="btn btn-outline-primary" for="visible">Visible</label>
         </div>
 
