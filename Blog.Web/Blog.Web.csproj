@@ -15,15 +15,18 @@
 
   <ItemGroup>
     <Content Remove="compilerconfig.json" />
+    <Content Remove="wwwroot\css\_AdminPanelStyle.scss" />
     <Content Remove="wwwroot\css\_layoutstyle.scss" />
   </ItemGroup>
 
   <ItemGroup>
+    <_ContentIncludedByDefault Remove="wwwroot\css\_AdminPanelStyle.scss" />
     <_ContentIncludedByDefault Remove="wwwroot\css\_layoutstyle.scss" />
   </ItemGroup>
 
   <ItemGroup>
     <None Include="compilerconfig.json" />
+    <None Include="wwwroot\css\_AdminPanelStyle.scss" />
     <None Include="wwwroot\css\_layoutstyle.scss" />
   </ItemGroup>
 

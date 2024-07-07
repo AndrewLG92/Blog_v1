@@ -1,10 +1,14 @@
 ﻿body {
+    overflow-x: hidden;
+    display: flex;
+    min-height: 100vh;
+    position: relative;
+
     .test-class {
         margin-top: 20em;
         width: 200px !important;
         height: 300px;
         background-color: rgb(37 28 144) !important;
-        
     }
 
     .btn-close {
@@ -19,7 +23,79 @@
     .navbar-toggler {
         border: none;
     }
+
     .navbar-toggler:focus {
         box-shadow: none !important;
+    }
+
+    .navbar {
+        background-color: rgba(31 17 199);
+        position: sticky;
+        top: 0;
+        left: 0;
+        height: 100vh;
+        width: 16rem;
+        padding: 1.8rem 0.85rem;
+        color: #fff;
+        display: flex;
+        flex-direction: column;
+        transition: width 0.5s ease-in-out;
+
+        .container, .sidebar-top {
+            position: relative;
+
+            .sidebar-top {
+                position: relative;
+                display: flex;
+                align-items: center;
+            }
+
+            .sidebar-top h3 {
+                padding-left: 0.5rem;
+                font-weight: 600;
+                font-size: 1.15rem;
+            }
+
+
+            .nav-btn {
+                position: absolute;
+                height: 27px;
+                padding: 0 0.3rem;
+                background-color: rgba(31 17 199);
+                border-radius: 6px;
+                cursor: pointer;
+                box-shadow: 0 3px 10px -3px rgba(70, 46, 118, 0.3);
+                right: -2.5rem;
+                transform: translateY(-50%) translateX(-8px);
+                opacity: 0;
+                pointer-events: none;
+                transition: 0.3s;
+            }
+
+            .nav-btn i {
+                transition: 0.3s;
+                vertical-align: -0.09em !important;
+            }
+
+            .nav-btn:hover {
+                background-color: rgba(31 17 199);
+            }
+
+            nav:hover, .nav-btn,
+            .nav-btn.hovered {
+                transform: translateY(-50%) translateX(0px);
+                opacity: 1;
+                pointer-events: all;
+            }
+        }
+    }
+
+    nav::before {
+        content: "";
+        position: absolute;
+        width: 2rem;
+        height: 100%;
+        top: 0;
+        left: 100%;
     }
 }

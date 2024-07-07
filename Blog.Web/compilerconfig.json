@@ -2,5 +2,9 @@
   {
     "outputFile": "wwwroot/css/_layoutstyle.css",
     "inputFile": "wwwroot/css/_layoutstyle.scss"
+  },
+  {
+    "outputFile": "wwwroot/css/_AdminPanelStyle.css",
+    "inputFile": "wwwroot/css/_AdminPanelStyle.scss"
   }
 ]

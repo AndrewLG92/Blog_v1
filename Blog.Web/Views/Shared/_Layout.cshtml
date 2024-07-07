@@ -14,8 +14,33 @@
     
 </head>
 <body>
-    <header class="mb-5 pb-5">
-        <nav class="navbar bg-primary fixed-top">
+    <header>
+        <nav class="container navbar align-items-start">
+            <div class="row row-cols-1 ">
+                <div class="col sidebar-top">
+                    <span class="nav-btn mt-4">
+                        <i class="bi bi-caret-right-square text-white"></i>
+                    </span>
+                </div>
+                <div class="col sidebar-top mb-5">
+                    <div class="card-title">
+                        <h2 class="fs-1">Blog</h2>
+                    </div>
+                </div>
+                <div class="col">
+                    <ul class="list-unstyled">
+                        <li class="fs-4 mb-3">
+                            <a class="nav-link text-white" asp-area="" asp-controller="Home" asp-action="Index">Home</a>
+                        </li>
+                        <li class="fs-4 mb-3">
+                            <a class="nav-link text-white" asp-area="" asp-controller="AdminPanel" asp-action="AdminIndex">Admin Panel</a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </nav>
+        
+        @* <nav class="navbar bg-primary fixed-top">
             <div class="container-fluid">
                 <button class="navbar-toggler" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasNavbar" aria-controls="offcanvasNavbar" aria-label="Toggle navigation">
                     <i class="bi bi-caret-right-square text-white"></i>
@@ -28,7 +53,6 @@
                         <h5 class="offcanvas-title" id="offcanvasNavbarLabel">
                             <a class="navbar-brand text-white" asp-area="" asp-controller="Home" asp-action="Index">Blog</a>
                         </h5>
-                        @* <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button> *@
                     </div>
                     <div class="offcanvas-body">
                         <ul class="navbar-nav justify-content-end flex-grow-1 pe-3">
@@ -52,9 +76,9 @@
                     </div>
                 </div>
             </div>
-        </nav>
+        </nav> *@
     </header>
-    <div class="container mt-5">
+    <div class="container mt-3">
         <main role="main" class="pb-3">
             @RenderBody()
         </main>
@@ -63,5 +87,6 @@
     <script src="~/js/site.js" asp-append-version="true"></script>
     <script src="~/lib/bootstrap/js/bootstrap.bundle.min.js"></script>
     @await RenderSectionAsync("Scripts", required: false)
+    @await RenderSectionAsync("Styles", required: false)
 </body>
 </html>

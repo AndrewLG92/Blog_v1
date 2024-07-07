@@ -7,6 +7,8 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using Blog.Web.Data;
 using Blog.Web.Models.Domain;
+using System.Runtime.InteropServices;
+using Blog.Web.Models.ViewModels;
 
 namespace Blog.Web.Controllers
 {
@@ -20,31 +22,26 @@ namespace Blog.Web.Controllers
         }
 
         // GET: AdminPanel
-        public IActionResult AdminIndex()
+        public async Task<IActionResult> AdminIndex()
         {
-            return View();
-        }
+            List<Tag> tags = await _context.Tags.ToListAsync();
+            List<BlogCategory> categories = await _context.BlogCategories.ToListAsync();
 
-        // GET: AdminPanel/Details/5
-        public async Task<IActionResult> Details(Guid? id)
-        {
-            if (id == null)
+            var model = new List<MultipleModels>
             {
-                return NotFound();
-            }
+                new MultipleModels
+                {
+                    Tags = tags,
+                    BlogCategories = categories
+                }
 
-            var blogPost = await _context.BlogPosts
-                .FirstOrDefaultAsync(m => m.Id == id);
-            if (blogPost == null)
-            {
-                return NotFound();
-            }
+            };
 
-            return View(blogPost);
+            return View(model);
         }
 
         // GET: AdminPanel/Create
-        public IActionResult Create()
+        public IActionResult CreateTag()
         {
             return View();
         }
@@ -54,32 +51,19 @@ namespace Blog.Web.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("Id,Heading,PageTitle,Content,UrlHandle,PublishedDate,Author,Visible")] BlogPost blogPost)
+        public async Task<IActionResult> CreateTag(AddTagRequestViewModel tag)
         {
             if (ModelState.IsValid)
             {
-                blogPost.Id = Guid.NewGuid();
-                _context.Add(blogPost);
+                var item = new Tag
+                {
+                    Name = tag.Name,
+                };
+                await _context.Tags.AddAsync(item);
                 await _context.SaveChangesAsync();
-                return RedirectToAction(nameof(Index));
+                return RedirectToAction("AdminIndex");
             }
-            return View(blogPost);
-        }
-
-        // GET: AdminPanel/Edit/5
-        public async Task<IActionResult> Edit(Guid? id)
-        {
-            if (id == null)
-            {
-                return NotFound();
-            }
-
-            var blogPost = await _context.BlogPosts.FindAsync(id);
-            if (blogPost == null)
-            {
-                return NotFound();
-            }
-            return View(blogPost);
+            return RedirectToAction("AdminIndex");
         }
 
         // POST: AdminPanel/Edit/5

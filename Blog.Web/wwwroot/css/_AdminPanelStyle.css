@@ -1,0 +1,4 @@
+﻿tbody {
+  max-height: clamp(5em, 10vh, 250px);
+  overflow: auto;
+}

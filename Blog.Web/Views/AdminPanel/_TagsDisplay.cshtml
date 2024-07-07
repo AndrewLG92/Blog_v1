@@ -1,14 +1,9 @@
 ﻿@model List<Blog.Web.Models.Domain.Tag>
 
-@{
-    ViewData["Title"] = "Tags";
-}
-
-
 
 <div class="container">
     <div class="row">
-        <h3 class="col">@ViewData["Title"]</h3>
+        <h3 class="col">Tags</h3>
         <button class="btn btn-primary col-1" data-bs-toggle="modal" data-bs-target="#addModal" onclick="loadAddModal()">Add Tag</button>
     </div>
     <hr />
@@ -89,8 +84,8 @@
 
 @section Scripts {
     <script>
-        function loadAddModal(id) {
-            $("#addModalBody").load("/AdminTags/Add");
+        function loadAddModal() {
+            $("#addModalBody").load("/AdminPanel/CreateTag");
         }
 
         function loadEditModal(id) {

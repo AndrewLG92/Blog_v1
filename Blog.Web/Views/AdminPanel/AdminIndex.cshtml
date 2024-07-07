@@ -1,14 +1,51 @@
-﻿
+﻿@model List<Blog.Web.Models.ViewModels.MultipleModels>
 @{
 }
 
+@section Styles {
+    <link href="@Url.Content("~/css/_AdminPanelStyle.css")" rel="stylesheet" type="text/css"/>
+}
 
 <div class="container text-center">
     <div class="row row-cols-2">
         <div class="col pb-5">
             <div class="card shadow-lg">
+                <div class="card-header">
+                    <div class="row justify-content-center column-gap-5">
+                        <div class="col-1 fs-5 w-25">
+                            Tags
+                        </div>
+                        <div class="col-md-5 w-25">
+                            <button class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#addModal" onclick="loadAddModal()">Add Tag</button>
+                        </div>
+                    </div>
+                    
+                </div>
                 <div class="card-body">
-                    This is some text within a card body.
+                    <table class="table table-responsive table-hover">
+                        <thead class="sticky-top">
+                            <tr class="table-active">
+                                <th>Id</th>
+                                <th>Name</th>
+                                <th>Action</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @foreach (var mm in Model)
+                            {
+                                @if (mm.Tags != null)
+                                {
+                                    @foreach (var tag in mm.Tags)
+                                    {
+                                        <tr>
+                                            <td>@tag.Id</td>
+                                            <td>@tag.Name</td>
+                                        </tr>
+                                    }
+                                }
+                            }
+                        </tbody>
+                    </table>
                 </div>
             </div>
         </div>
@@ -24,3 +61,34 @@
         </div>
     </div>
 </div>
+
+<!-- Add Tag -->
+<div class="modal fade" id="addModal" tabindex="-1" role="dialog" aria-labelledby="addModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="addModalLabel">Add Item</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body" id="addModalBody">
+                <!-- Partial view will be loaded here -->
+            </div>
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+    <script>
+        function loadAddModal(id) {
+            $("#addModalBody").load("/AdminTags/Add");
+        }
+
+        function loadEditModal(id) {
+            $("#editModalBody").load("/AdminTags/EditTag/" + id);
+        }
+
+        function loadDeleteModal(id) {
+            $("#deleteModalBody").load("/AdminTags/Delete/" + id);
+        }
+    </script>
+}

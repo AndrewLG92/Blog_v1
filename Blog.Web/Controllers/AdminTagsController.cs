@@ -23,7 +23,7 @@ namespace Blog.Web.Controllers
         {
             var tags = await blogDbContext.Tags.ToListAsync();
 
-            return View(tags);
+            return PartialView("_TagsDisplay", tags);
         }
 
 
@@ -48,7 +48,7 @@ namespace Blog.Web.Controllers
             // Need to Save to the DB
             await blogDbContext.SaveChangesAsync();
 
-            return RedirectToAction("TagsDisplay");
+            return RedirectToAction("AdminIndex");
         }
 
 
@@ -67,7 +67,7 @@ namespace Blog.Web.Controllers
                 return PartialView("_TagModal", item);
             }
 
-            return RedirectToAction("TagsDisplay");
+            return PartialView("_TagsDisplay");
         }
 
 
@@ -82,10 +82,10 @@ namespace Blog.Web.Controllers
 
                 await blogDbContext.SaveChangesAsync();
 
-                return RedirectToAction("TagsDisplay");
+                return PartialView("_TagsDisplay");
             }
 
-            return RedirectToAction("TagsDisplay");
+            return PartialView("_TagsDisplay");
         }
 
         [HttpPost]
@@ -101,7 +101,7 @@ namespace Blog.Web.Controllers
                 await blogDbContext.SaveChangesAsync();
             }
 
-            return RedirectToAction("TagsDisplay");
+            return PartialView("_TagsDisplay");
         }
 
         [HttpGet]
@@ -116,7 +116,7 @@ namespace Blog.Web.Controllers
                 return PartialView("_DeleteModel", tag);
                 
             }
-            return RedirectToAction("TagsDisplay");
+            return PartialView("_TagsDisplay");
 
         }
     }
