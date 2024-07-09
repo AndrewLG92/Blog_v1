@@ -19,15 +19,6 @@ namespace Blog.Web.Controllers
         }
 
         [HttpGet]
-        public async Task<IActionResult> TagsDisplay()
-        {
-            var tags = await blogDbContext.Tags.ToListAsync();
-
-            return PartialView("_TagsDisplay", tags);
-        }
-
-
-        [HttpGet]
         public IActionResult Add()
         {
             return PartialView("_AddModel");
@@ -48,7 +39,7 @@ namespace Blog.Web.Controllers
             // Need to Save to the DB
             await blogDbContext.SaveChangesAsync();
 
-            return RedirectToAction("AdminIndex");
+            return RedirectToAction("AdminIndex", "AdminPanel");
         }
 
 
@@ -67,7 +58,7 @@ namespace Blog.Web.Controllers
                 return PartialView("_TagModal", item);
             }
 
-            return PartialView("_TagsDisplay");
+            return RedirectToAction("AdminIndex", "AdminPanel");
         }
 
 
@@ -82,10 +73,9 @@ namespace Blog.Web.Controllers
 
                 await blogDbContext.SaveChangesAsync();
 
-                return PartialView("_TagsDisplay");
             }
 
-            return PartialView("_TagsDisplay");
+            return RedirectToAction("AdminIndex", "AdminPanel");
         }
 
         [HttpPost]
@@ -101,7 +91,7 @@ namespace Blog.Web.Controllers
                 await blogDbContext.SaveChangesAsync();
             }
 
-            return PartialView("_TagsDisplay");
+            return RedirectToAction("AdminIndex", "AdminPanel");
         }
 
         [HttpGet]
@@ -116,7 +106,7 @@ namespace Blog.Web.Controllers
                 return PartialView("_DeleteModel", tag);
                 
             }
-            return PartialView("_TagsDisplay");
+            return RedirectToAction("AdminIndex", "AdminPanel");
 
         }
     }
