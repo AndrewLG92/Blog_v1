@@ -1,0 +1,16 @@
+﻿@model Blog.Web.Models.ViewModels.AddBlogCategoryViewModel
+@{
+}
+
+<form method="post">
+    <div class="form-group mb-1">
+        <label class="form-label">Name</label>
+        <input type="text" class="form-control" id="name" asp-for="Name" />
+    </div>
+    <div class="modal-footer">
+        <div class="form-group">
+            <button asp-action="AddCat" asp-controller="AdminCategory" type="submit" class="btn btn-primary">Submit</button>
+            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
+        </div>
+    </div>
+</form>

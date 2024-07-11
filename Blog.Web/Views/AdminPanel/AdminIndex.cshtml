@@ -59,8 +59,51 @@
         </div>
         <div class="col">
             <div class="card shadow-lg">
+                <div class="card-header">
+                    <div class="row justify-content-center column-gap-5">
+                        <div class="col-1 fs-5 w-25">
+                            Tags
+                        </div>
+                        <div class="col-md-5 w-25">
+                            <button class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#catAddModal" onclick="loadCatAddModal()">Add Category</button>
+                        </div>
+                    </div>
+
+                </div>
                 <div class="card-body">
-                    This is some text within a card body.
+                    <div class="scroll-bar">
+                        <table class="table table-bordered table-responsive table-hover">
+                            <thead class="sticky-top">
+                                <tr class="table-active">
+
+                                    <th>Name</th>
+                                    <th>Action</th>
+                                </tr>
+                            </thead>
+
+                            <tbody>
+                                @foreach (var mm in Model)
+                                {
+                                    @if (mm.BlogCategories != null)
+                                    {
+                                        @foreach (var cat in mm.BlogCategories)
+                                        {
+                                            <tr>
+                                                <td>@cat.Name</td>
+                                                <td>
+                                                    <div class="btn-group">
+                                                        <button class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#catEditModal" onclick="loadCatEditModal('@cat.Id')">Edit</button>
+                                                        <button class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#catDeleteModal" onclick="loadCatDeleteModal('@cat.Id')">Delete</button>
+                                                    </div>
+                                                </td>
+                                            </tr>
+                                        }
+                                    }
+                                }
+                            </tbody>
+
+                        </table>
+                    </div>
                 </div>
             </div>
         </div>
@@ -112,8 +155,55 @@
     </div>
 </div>
 
+
+<!-- Cat Add Modal -->
+<div class="modal fade" id="catAddModal" tabindex="-1" role="dialog" aria-labelledby="catAddModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="catAddModalLabel">Add Item</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body" id="catAddModalBody">
+                <!-- Partial view will be loaded here -->
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Cat Edit Modal -->
+<div class="modal fade" id="catEditModal" tabindex="-1" role="dialog" aria-labelledby="catEditModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="catEditModalLabel">Edit Item</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body" id="catEditModalBody">
+                <!-- Partial view will be loaded here -->
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Cat Delete Modal -->
+<div class="modal fade" id="catDeleteModal" tabindex="-1" role="dialog" aria-labelledby="catDeleteModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="catDeleteModalLabel">Delete Item</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body" id="catDeleteModalBody">
+                <!-- Partial view will be loaded here -->
+            </div>
+        </div>
+    </div>
+</div>
+
 @section Scripts {
     <script>
+        //TAGS
         function loadAddModal() {
             $("#addModalBody").load("/AdminTags/Add");
         }
@@ -124,6 +214,19 @@
 
         function loadDeleteModal(id) {
             $("#deleteModalBody").load("/AdminTags/Delete/" + id);
+        }
+
+        //CATEGORY
+        function loadCatAddModal() {
+            $("#catAddModalBody").load("/AdminCategory/AddCat");
+        }
+
+        function loadCatEditModal(id) {
+            $("#catEditModalBody").load("/AdminCategory/EditCat/" + id);
+        }
+
+        function loadCatDeleteModal(id) {
+            $("#catDeleteModalBody").load("/AdminCategory/Delete/" + id);
         }
     </script>
 }

@@ -1,0 +1,14 @@
+﻿@model Blog.Web.Models.Domain.BlogCategory
+
+<form method="post">
+    <div class="form-group">
+        <p>Are you sure you want to delete @Html.Raw(@Model.Name)?</p>
+    </div>
+    <div class="modal-footer">
+        <div class="form-group">
+            <input type="hidden" asp-for="Id" />
+            <button asp-action="DeleteCat" type="submit" class="btn btn-danger">Delete</button>
+            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
+        </div>
+    </div>
+</form>
